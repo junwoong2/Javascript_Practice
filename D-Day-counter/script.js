@@ -22,12 +22,16 @@ const counterMaker = function () {
   const remaining = (targetDate - nowDate) / 1000;
 
   if (remaining === 0 || remaining < 0) {
-    console.log("타이머가 종료되었습니다.");
+    container.style.display = "none";
     messageContainer.innerHTML = "<h3>타이머가 종료되었습니다.</h3>";
+    messageContainer.style.display = "flex";
+    return;
   } else if (isNaN(remaining)) {
     //만약 잘못된 날짜가 들어왔다면
-    console.log("유효한 시간대가 아닙니다.");
+    container.style.display = "none";
     messageContainer.innerHTML = "<h3>유효한 시간대가 아닙니다.</h3>";
+    messageContainer.style.display = "flex";
+    return;
   }
 
   const remainingObj = {
@@ -37,21 +41,39 @@ const counterMaker = function () {
     remainingSec: Math.floor(remaining) % 60,
   };
 
-  const documentObj = {
-    days: document.getElementById("days"),
-    hours: document.getElementById("hours"),
-    min: document.getElementById("min"),
-    sec: document.getElementById("sec"),
-  };
-
+  const documentArr = ["days", "hours", "min", "sec"];
   const timeKeys = Object.keys(remainingObj);
-  const docKeys = Object.keys(documentObj);
+  //['remainingDate', 'remainingHours', ...]
 
-  for (let i = 0; i < timeKeys.length; i = i + 1) {
-    documentObj[docKeys[i]].textContent = remainingObj[timeKeys[i]];
+  let i = 0;
+  for (let tag of documentArr) {
+    document.getElementById(tag).textContent = remainingObj[timeKeys[i]];
+    i++;
   }
 
-  for (let key in documentObj) {
-    console.log(key);
-  }
+  // const documentObj = {
+  //   days: document.getElementById("days"),
+  //   hours: document.getElementById("hours"),
+  //   min: document.getElementById("min"),
+  //   sec: document.getElementById("sec"),
+  // };
+
+  // let i = 0;
+  // for (let key in documentObj) {
+  //   documentObj[key].textContent = remainingObj[timeKeys[i]];
+  //   i++;
+  // }
+};
+
+const starter = function () {
+  container.style.display = "flex";
+  messageContainer.style.display = "none";
+  counterMaker();
+  setInterval(counterMaker, 1000);
+
+  // for (let i = 0; i < 100; i++) {
+  //   setTimeout(() => {
+  //     counterMaker();
+  //   }, 1000 * i);
+  // }
 };
