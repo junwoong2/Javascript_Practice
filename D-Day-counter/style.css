@@ -8,7 +8,7 @@ body {
   align-items: center;
 }
 
-#start-btn {
+.start-btn {
   font-size: 1.3rem;
   margin-top: 0.5rem;
 }
