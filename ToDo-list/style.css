@@ -57,3 +57,14 @@ li button {
 li button:active {
   border: 2px solid grey;
 }
+
+.delete-btn-wrapper {
+  margin-top: 1rem;
+}
+
+.delete-btn-wrapper button {
+  font-weight: bold;
+  background-color: antiquewhite;
+  padding: 02rem 1rem;
+  cursor: pointer;
+}
